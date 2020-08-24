@@ -139,10 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Fuzzificador.h" />
     <ClInclude Include="FuzzyCMeans.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Fuzzificador.cpp" />
     <ClCompile Include="FuzzyCMeans.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
