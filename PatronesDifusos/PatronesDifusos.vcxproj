@@ -139,8 +139,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Dataset.h" />
     <ClInclude Include="Fuzzificador.h" />
     <ClInclude Include="FuzzyCMeans.h" />
+    <ClInclude Include="FuzzyID3.h" />
+    <ClInclude Include="TreeNodo.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fuzzificador.cpp" />

@@ -40,6 +40,4 @@ private:
 	double get_new_pertenecia(int i, int j);
 
 	double actualizar_pertenencias();
-
-	double** crear_arreglo_random(int fila, int columna);
 };

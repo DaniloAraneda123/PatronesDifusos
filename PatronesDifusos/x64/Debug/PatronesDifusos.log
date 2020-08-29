@@ -1,4 +1,9 @@
-﻿  FuzzyCMeans.cpp
-  main.cpp
-  Generando código...
+﻿  main.cpp
+E:\Codigos\Proyecto\Patrones Difusos\PatronesDifusos\Utils.h(83,1): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos
+E:\Codigos\Proyecto\Patrones Difusos\PatronesDifusos\Utils.h(116,1): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos
+E:\Codigos\Proyecto\Patrones Difusos\PatronesDifusos\Utils.h(138,1): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos
+E:\Codigos\Proyecto\Patrones Difusos\PatronesDifusos\Utils.h(149,1): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos
+E:\Codigos\Proyecto\Patrones Difusos\PatronesDifusos\Utils.h(160,1): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos
+E:\Codigos\Proyecto\Patrones Difusos\PatronesDifusos\Utils.h(172,1): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos
+E:\Codigos\Proyecto\Patrones Difusos\PatronesDifusos\Utils.h(186,1): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos
   PatronesDifusos.vcxproj -> E:\Codigos\Proyecto\Patrones Difusos\x64\Debug\PatronesDifusos.exe

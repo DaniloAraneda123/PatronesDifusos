@@ -9,35 +9,50 @@ using namespace std;
 El disenio por contranto aun no es documentando en el codigo.
 */
 
-
 //Construcctor
-FuzzyCMeans::FuzzyCMeans(int nDatos, int nClusters, int nDimensiones, int it, double error, double gradoFuzzy, double** datos)
-{
-	num_datos = nDatos;
-	num_clusters = nClusters;
-	num_dimensiones = nDimensiones;
-	iteraciones = it;
-	epsilon = error;
-	borrosidad = gradoFuzzy;
-	data_puntos = datos;
+	FuzzyCMeans::FuzzyCMeans(int nDatos, int nClusters, int nDimensiones, int it, double error, double gradoFuzzy, double** datos)
+	{
+		num_datos = nDatos;
+		num_clusters = nClusters;
+		num_dimensiones = nDimensiones;
+		iteraciones = it;
+		epsilon = error;
+		borrosidad = gradoFuzzy;
+		data_puntos = datos;
 
-	centroides = crear_arreglo_random(num_clusters, num_dimensiones);
-	grado_pertenencia = crear_arreglo_random(num_datos, num_clusters);
 
-	double s;
-	int r, rval;
-	for (int i = 0; i < num_datos; i++) {
-		s = 0.0;
-		r = 100;
-		for (int j = 1; j < num_clusters; j++) {
-			rval = rand() % (r + 1);
-			r -= rval;
-			grado_pertenencia[i][j] = rval / 100.0;
-			s += grado_pertenencia[i][j];
+		//Crear Matriz Centroides
+		centroides = new double* [num_clusters];
+		for (int i = 0; i < num_clusters; i++)
+		{
+			centroides[i] = new double[num_dimensiones];
+
+			for (int j = 0; j < num_dimensiones; j++)
+			{
+				centroides[i][j] = 0;
+			}
 		}
-		grado_pertenencia[i][0] = 1.0 - s;
+
+		//Crear Matriz grados de pertencia 
+		double s;
+		int r, rval;
+		grado_pertenencia = new double* [num_datos];
+
+		for (int i = 0; i < num_datos; i++) 
+		{
+			s = 0.0;
+			r = 100;
+			grado_pertenencia[i] = new double[num_clusters];
+			for (int j = 0; j < num_clusters; j++) 
+			{
+				rval = rand() % (r + 1);
+				r -= rval;
+				grado_pertenencia[i][j] = rval / 100.0;
+				s += grado_pertenencia[i][j];
+			}
+			grado_pertenencia[i][0] = 1.0 - s;
+		}
 	}
-}
 
 
 	/*
@@ -46,16 +61,42 @@ FuzzyCMeans::FuzzyCMeans(int nDatos, int nClusters, int nDimensiones, int it, do
 	*/
 	double** FuzzyCMeans::fcm()
 	{
-		double max_dif;
+		double max_dif=0;
 		int iteracion = 0;
 
+		cout << "num_data_points: " << num_datos << "    num_clusters:  " << num_clusters << "   num_dimensions:  " << num_dimensiones << endl;
+		cout << "borrosidad: " << borrosidad << "   epsilon:  " << epsilon << endl;
+
 		do {
+
+
+
 			calcular_vectores_centroides();
 			max_dif = actualizar_pertenencias();
 			iteracion++;
-		} while (max_dif > epsilon || iteracion <= iteraciones);
+
+
+			cout << "Terminada Iteracion: "<< iteracion <<"  , error: " << max_dif << " es mayor que "<< epsilon <<endl;
+			for (int i = 0; i < num_clusters; i++)
+			{
+				cout << "Centroide " << i << ":  ";
+				for (int j = 0; j < num_dimensiones; j++)
+				{
+
+					cout << centroides[i][j] << " | ";
+				}
+				cout << endl;
+			}
+			cout << endl; cout << endl; cout << "////////////////////////////"; cout << endl;
+
+		} while (max_dif > epsilon && iteracion < iteraciones);
 
 		return centroides;
+	}
+
+	bool FuzzyCMeans::guardarCentroides(string ruta)
+	{
+		return false;
 	}
 
 	/*COMPLETAR*/
@@ -88,37 +129,32 @@ FuzzyCMeans::FuzzyCMeans(int nDatos, int nClusters, int nDimensiones, int it, do
 	*/
 	void FuzzyCMeans::calcular_vectores_centroides()
 	{
-		int i, j, k;
 		double numerator, denominator;
-		double** t = crear_arreglo_random(num_datos, num_clusters);
+		double** t;
+		t = new double* [num_datos];
 
-		for (i = 0; i < num_datos; i++)
+		for (int i = 0; i < num_datos; i++)
 		{
-
-			for (j = 0; j < num_clusters; j++)
+			t[i] = new double [num_clusters];
+			for (int j = 0; j < num_clusters; j++)
 			{
 				t[i][j] = pow(grado_pertenencia[i][j], borrosidad);
 			}
-
 		}
 
-		for (j = 0; j < num_clusters; j++)
+		for (int j = 0; j < num_clusters; j++)
 		{
-
-			for (k = 0; k < num_dimensiones; k++)
+			for (int k = 0; k < num_dimensiones; k++)
 			{
 				numerator = 0.0;
 				denominator = 0.0;
-
-				for (i = 0; i < num_datos; i++)
+				for (int i = 0; i < num_datos; i++)
 				{
 					numerator += t[i][j] * data_puntos[i][k];
 					denominator += t[i][j];
 				}
 				centroides[j][k] = numerator / denominator;
-
 			}
-
 		}
 	}
 
@@ -186,27 +222,5 @@ FuzzyCMeans::FuzzyCMeans(int nDatos, int nClusters, int nDimensiones, int it, do
 
 		}
 		return max_dif;
-	}
-
-	/*
-	Metodo para crear un arreglo de manera dinamica.
-	*/
-	double** FuzzyCMeans::crear_arreglo_random(int fila, int columna) //Metodo para crear arreglos dinamincos
-	{
-		int rval;
-		double** matriz = new double* [fila];
-
-		for (int i = 0; i < fila; i++)
-		{
-			matriz[i] = new double[columna];
-
-			for (int j = 0; j < columna; j++)
-			{
-				rval = rand() % (100 + 1);
-				matriz[i][j] = rval / 100.0;
-			}
-		}
-
-		return matriz;
 	}
 
