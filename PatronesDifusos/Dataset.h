@@ -118,9 +118,9 @@ public:
     {
         vector<string> lista;
         string actual="";
-        for(int i = 0 ; atributos.size() ; i++)
+        for(int i = 0 ; i<atributos.size() ; i++)
         {
-            if (atributos[i]!= nombreClase && nombreClase!=actual)
+            if (atributos[i]!= nombreClase && atributos[i]!=actual)
             {
                 lista.push_back(atributos[i]);
                 actual = atributos[i];
@@ -144,133 +144,5 @@ public:
     }
 
 };
-/*
-    void addRow(Row row)
-    {
-        row.setIndex(this->rows.size());
-        //row.setDataset(*this);
-        this->rows.push_back(row);
-    }
 
-    void  addAttribute(Attribute attribute)
-    {
-        attribute.setIndex(this->attribues.size());
-        //attribute.setDataset(*this);
-        this->attribues.push_back(attribute);
-    }*/
-
-    /*
-    int Dataset::getRowsCount()
-    {
-        return this->rows.size();
-    }
-
-    int Dataset::getAttributesCount()
-    {
-        return this->attribues.size();
-    }
-
-    Attribute Dataset::getAttribute(int idx)
-    {
-        return this->attribues[idx];
-    }
-
-    Attribute Dataset::getAttribute(string attrName)
-    {
-        for (int i = 0; i < attribues.size(); i++)
-        {
-            if (attribues[i].getName() == attrName)
-            {
-                return attribues[i];
-            }
-        }
-
-    }
-
-
-    /*
-    Object Dataset::getCrispValue(int rowIdx, int attrIdx)
-    {
-        return this->rows[rowIdx].crispValues[attrIdx];
-    }
-
-    Object Dataset::getCrispValue(int rowIdx, string attrName) {
-        int i = 0;
-        for (; i < attribues.size(); i++) {
-            if (attribues[i].getName()==attrName)
-            {
-                return this->getCrispValue(rowIdx, i);
-            }
-        }
-    }*/
-
-    /*double Dataset::getFuzzyValue(int rowIdx, int attrIdx, int termIdx)
-    {
-        return this->rows[rowIdx].getFuzzyValue(attrIdx, termIdx);
-    }
-
-    void Dataset::setFuzzyValue(int rowIdx, int idx, int termIdx, double val)
-    {
-        this->rows[rowIdx].setFuzzyValue(idx, termIdx, val);
-    }
-
-    double Dataset::getFuzzyValue(int rowIdx, int attrIdx, string termName)
-    {
-        return this->rows[rowIdx].getFuzzyValue(attrIdx, termName);
-    }
-
-    void Dataset::setFuzzyValue(int rowIdx, int idx, string termName, double val)
-    {
-        this->rows[rowIdx].setFuzzyValue(idx, termName, val);
-    }
-
-    double Dataset::getFuzzyValue(int rowIdx, string attrName, int termIdx)
-    {
-        return this->rows[rowIdx].getFuzzyValue(attrName, termIdx);
-    }
-
-    void Dataset::setFuzzyValue(int rowIdx, string attrName, int termIdx, double val)
-    {
-        this->rows[rowIdx].setFuzzyValue(attrName, termIdx, val);
-    }
-
-    double Dataset::getFuzzyValue(int rowIdx, string attrName, string termName)
-    {
-        return this->rows[rowIdx].getFuzzyValue(attrName, termName);
-    }
-
-    void Dataset::setFuzzyValue(int rowIdx, string attrName, string termName, double val)
-    {
-        this->rows[rowIdx].setFuzzyValue(attrName, termName, val);
-    }
-
-    vector<double> Dataset::getFuzzyValues(int rowIdx, int attrIdx)
-    {
-        return this->attribues[attrIdx].getFuzzyValues(rowIdx);
-    }
-
-    vector<double> Dataset::getFuzzyValues(int rowIdx, string attrName)
-    {
-        int i = 0;
-        for (; i < this->attribues.size(); i++) {
-            if (this->attribues[i].getName()==attrName) {
-                return this->attribues[i].getFuzzyValues(rowIdx);
-            }
-        }
-    }
-
-    void Dataset::setFuzzyValues(int rowIdx, int attrIdx, double** values)
-    {
-        this->rows[rowIdx].setFuzzyValues(attrIdx, values);
-    }
-
-    void Dataset::setFuzzyValues(int rowIdx, string attrName, double* values)
-    {
-        this->rows[rowIdx].setFuzzyValues(attrName, values);
-    }
-
-    void Dataset::setFuzzyValues(int rowIdx, double** values)
-    {
-        this->rows[rowIdx].setFuzzyValues(values);
-    }*/
 

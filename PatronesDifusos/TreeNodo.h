@@ -12,29 +12,25 @@ class TreeNode
     
 
 private:
-    //tipoNodo:
-    //0 -> valor
-    //1 -> hoja
-    //2 -> atributo
 
-    TreeNode* padre;
-    string titulo;
-    int tipoNodo;
-    double valor;
+    TreeNode* padre=NULL;
+    string titulo="NULL";
+    string tipoNodo="";
+    double valor=0;
     vector<TreeNode> hijos;
 
 public:
-    TreeNode(int tipo, string nombre)
+    TreeNode(string tipo, string nombre)
     {
         titulo = nombre;
         tipoNodo = tipo;
     }
 
-    TreeNode(string nombre,double value,bool tipo)
+    TreeNode(string nodeType, string title, TreeNode *parent)
     {
-        titulo = nombre;
-        valor = value;
-        tipoNodo = tipo;
+        titulo = title;
+        padre = parent;
+        tipoNodo = nodeType;
     }
 
     vector<TreeNode> getChildren() 
@@ -52,9 +48,9 @@ public:
         return titulo;
     }
 
-    void setParent(TreeNode parent) 
+    void setParent(TreeNode* parent) 
     {
-        padre = &parent;
+        padre = parent;
     }
 
     void setTitle(string t) 
@@ -64,20 +60,21 @@ public:
 
     int getChildrenCount() 
     {
-        if (hijos.size()!=0)
-        {
-            return hijos.size();
-        }
-        return 0;
+        return hijos.size();
+    }
+
+    string getTipoNodo()
+    {
+        return tipoNodo;
     }
 
     void addChild(TreeNode child) 
     {
-        hijos.push_back(child);
         child.padre = this;
+        hijos.push_back(child);
     }
 
-    void addChild(string title, int nodeType) 
+    void addChild(string title, string nodeType) 
     {
         addChild(TreeNode(nodeType, title));
     }
@@ -105,7 +102,7 @@ public:
 
     bool isHoja() 
     {
-        return (tipoNodo == 1);
+        return (tipoNodo == "HOJA");
     }
 
     double getValue() 

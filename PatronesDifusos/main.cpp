@@ -6,6 +6,7 @@
 #include "Dataset.h"
 #include "FuzzyID3.h"
 #include <set>
+#include "TreeNodo.h"
 
 using namespace std;
 
@@ -111,11 +112,32 @@ int main()
 	//d.imprimirDataSet();
 
 	FuzzyID3 fdt (0.7, 0.0);
-	
-	cout<<fdt.getAmbiguedad(d,"Plan","Outlook");
 
 	cout << "G(Outlook) = "<< fdt.getAmbiguedad(d, "Plan", "Outlook") << endl;
 	cout << "G(Temprature) = "<< fdt.getAmbiguedad(d, "Plan", "Temprature") << endl;
 	cout << "G(Humidity) = "<< fdt.getAmbiguedad(d, "Plan", "Humidity") << endl;
-	cout << "G(Wind) = "<<fdt.getAmbiguedad(d, "Plan", "Wind")<<endl;
+	cout << "G(Wind) = "<<fdt.getAmbiguedad(d, "Plan", "Wind")<<endl << endl << endl << endl;
+
+	TreeNode root = fdt.construirArbol(d, "Plan");
+
+	fdt.printTree(root, "");
+
+	
+	cout << root.getChildren().size()<<endl;
+	vector<TreeNode> c = root.getChildren();
+
+	for (int i=0; i < c.size() ;i++)
+	{
+		cout<<c[i].getChildren().size() <<endl;
+	}
+
+	cout << fdt.miNodo->getTitle();
+
+	//vector<string> rules = fdt.generarReglas(root);
+
+	//cout << rules.size();
+	//for (string &rule : rules) 
+	//{
+		//cout<<rule<<endl;
+	//}
 }
